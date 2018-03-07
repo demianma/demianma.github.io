@@ -5,13 +5,12 @@
 <p id="user"></p>
 
 <script>
-var s = '{"first_name" : "Sammy", "last_name" : "Shark", "location" : "Ocean"}';
+var obj = '{"first_name" : "Sammy", "last_name" : "Shark", "location" : "Ocean"}';
 
-var obj = JSON.parse(s);
+var s = JSON.stringify(obj);
 
-document.getElementById("user").innerHTML =
-"Name: " + obj.first_name + " " + obj.last_name + "<br>" +
-"Location: " + obj.location;
+document.getElementById("user").innerHTML = s;
+
 </script>
 
 </body>
