@@ -1,18 +1,27 @@
-<!DOCTYPE html>
-<html>
-<body>
 
-<h2>Create JSON string from a JavaScript object.</h2>
-
-<p id="demo"></p>
-
-<script>
-
-var obj = { "name":"John", "age":30, "city":"New York"};
-var myJSON = JSON.stringify(obj);
-document.getElementById("demo").innerHTML = myJSON;
-
-</script>
-
+<html lang="pt-br">
+	<head>
+		<script type="text/JavaScript" src="lerolero.js"></script>
+		<link rel="stylesheet" type="text/css" href="css.css">
+	</head>
+	<body>
+		<span style="text-align: center;">
+			<h4>Gerador de Lero-Lero</h4></span>
+			<hr/>
+			<table style="width: 50%;">
+				<td>
+				Título da "Obra"<br>
+				<input type="text" id="t_titulo" value="Estratégias em um Novo Paradigma Globalizado"><br>
+				Quantas frases?<br>
+				<input type="text" id="t_linhas" value="20"><br>
+				<button onclick="leroLero()">Gerar!</button>
+				</td>
+			</table>
+		
+	<table style="width: 50%;">
+		<td>
+			<span style="text-align: center;"><h5 id="titulo"></h5></span>
+			<p id="texto"></p>
+		</td>
+	</table>
 </body>
-</html>
