@@ -1,27 +1,122 @@
-<!DOCTYPE html>
-<html lang="en-US">
-	<head>
-		<script type="text/JavaScript" src="lerolero.js"></script>
-		<link rel="stylesheet" type="text/css" href="css.css">
-	</head>
+<!doctype html>
+<html lang="pt-br">
+<html>
+	<header>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+		<script src="./frank.js"></script>
+		<style>
+		@font-face {
+		    font-family: "Comic Sans MS";
+		    src: url("./Comic Sans MS.ttf");
+		}
+		</style>
+		<link rel="preload" href="./Comic Sans MS.ttf" as="font" crossorigin="anonymous">
+		<title>Frank, a Baleia Franca.</title>
+	</header>
 	<body>
-		<span style="text-align: center;">
-			<h4>Gerador de Lero-Lero</h4></span>
-			<hr/>
-			<table style="width: 50%;">
-				<td>
-				Título da "Obra"<br>
-				<input type="text" id="t_titulo" value="Estratégias em um Novo Paradigma Globalizado"><br>
-				Quantas frases?<br>
-				<input type="text" id="t_linhas" value="20"><br>
-				<button onclick="leroLero()">Gerar!</button>
-				</td>
-			</table>
-		
-	<table style="width: 50%;">
-		<td>
-			<span style="text-align: center;"><h5 id="titulo"></h5></span>
-			<p id="texto"></p>
-		</td>
-	</table>
-</body>
+		<div class="container mt-3 mt-4">
+			<h1 class="pt-3 pb-3">Gerador de Quadrinhos do Frank</h1>
+		</div>
+		<div class="container mt-3 p-4 bg-light border rounded">
+			<h3 class="pb-1">Diálogos</h3><br>
+			<form>
+			    <div class="mb-3">
+			    	<label for="txtQuadro1" class="form-label">Texto do Quadrinho 1</label>
+			    	<textarea class="form-control" id="txtQuadro1" rows="3" required></textarea>
+			    	<div class="form-text">Fala do boca mole.</div>
+			    </div>
+				
+			    <div class="mb-3">
+			    	<label for="txtQuadro2" class="form-label">Texto do Quadrinho 2</label>
+			    	<textarea class="form-control" id="txtQuadro2" rows="3" required></textarea>
+			    	<div class="form-text">Resposta atravesada da baleia.</div>
+				</div>
+				<div class="btn-group mr-2 mb-2" role="button" aria-label="Botão Gerador">
+					<button type="button" class="btn btn-dark" onclick="fillFrank();">Trazer Frank à vida! 🐳</button>
+				</div>
+			</form>
+			</div>
+			
+			<div class="container mt-5 p-4 bg-light border rounded">
+				<h3 class="pb-1">Legenda</h3><br>
+				<form>
+				    <div class="mb-3">
+				    	<label for="txtLegenda" class="form-label">Algum comentário no início da legenda (opcional)</label>
+				    	<textarea class="form-control" id="txtLegenda" rows="3" required></textarea>
+				    	<div class="form-text">Adicionar algum comentário no início da legenda. Serão adicionadas informações e hashtags quando gerar os quadrinhos.</div>
+				    </div>
+					<div class="btn-group mr-2 mb-2" role="button" aria-label="Copiar Legenda">
+						<button type="button" class="btn btn-dark" onclick="copyToClipboard('txtLegenda');">Copiar Legenda</button>
+					</div>
+				</form>
+			</div>
+			
+			<div class="container mt-5 p-4 bg-light border rounded">
+			<div>
+				<h3 class="pb-1">Quadrinhos isolados</h3><br>
+				 <div>
+					<div class="btn-toolbar" role="toolbar" aria-label="Toolbar">
+						<div class="btn-group btn-group-lg mb-3" role="group" aria-label="Botões Download">
+							<a id="btnFrank1" href="#" download="frank1.png">
+						  		<button type="button" class="btn btn-dark">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-arrow-down-fill" viewBox="0 0 16 16">
+										<path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 6.854l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5a.5.5 0 0 1 1 0v3.793l1.146-1.147a.5.5 0 0 1 .708.708z"/>
+								  	</svg> 1
+								</button>
+							</a>
+							&nbsp;
+							<a id="btnFrank2" href="#" download="frank2.png">
+								<button type="button" class="btn btn-dark"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-arrow-down-fill" viewBox="0 0 16 16">
+									<path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 6.854l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5a.5.5 0 0 1 1 0v3.793l1.146-1.147a.5.5 0 0 1 .708.708z"/>
+									</svg> 2
+								</button>
+							</a>
+							&nbsp;
+							<a id="btnFrank3" href="frank3.png" download="frank3.png">
+								<button type="button" class="btn btn-dark"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-arrow-down-fill" viewBox="0 0 16 16">
+									<path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 6.854l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5a.5.5 0 0 1 1 0v3.793l1.146-1.147a.5.5 0 0 1 .708.708z"/>
+									</svg> 3
+								</button>
+							</a>
+							&nbsp;
+							<a id="btnFrank4" href="#" download="frank4.png">
+								<button type="button" class="btn btn-dark"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-arrow-down-fill" viewBox="0 0 16 16">
+				  <path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 6.854l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5a.5.5 0 0 1 1 0v3.793l1.146-1.147a.5.5 0 0 1 .708.708z"/>
+				</svg> Tira</button>
+											</a>
+				 					  	</div>	
+				 					</div>
+								</div>
+				<div class="row">
+					<div class="col-sm">
+						<img id="frank1" src="frank1.png" class="img-thumbnail" alt="frank1.png">
+					</div>
+					<div class="col-sm">
+						<img id="frank2" src="frank2.png" class="img-thumbnail" alt="frank2.png">
+					</div>
+					<div class="col-sm">
+						<img id="frank3" src="frank3.png" class="img-thumbnail" alt="frank3.png">
+					</div>
+				</div>	
+			</div>
+			<div>
+				<h3 class="pt-5 pb-1">Tirinha completa</h3><br>
+				<img id="frank4" class="img-fluid"  alt="frank4.png">
+			</div>
+		</div>
+		<div class="container p-4 bg-white">
+			<div class="help-block">
+				<h6 class="pt-5 text-muted">Bugs:</h4>
+				<small id="passwordHelpBlock" class="form-text text-muted">
+				- Clica mais vezes no botão de trazer Frank à vida caso a fonte não seja Comics e o texto não se repira nas outras.<br>
+				- A incrível fonte Comics dá pau às vezes em telefones. Clica outras vezes no botão que ela funciona.
+				- Tudo se resolve clicando várias vezes no botão, como se percebe.
+				- Alguns browsers no celular complicam com o botão de download. Contorne o problema: segura o dedão em cima e manda salvar.
+				</small>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+	</body>
+</html>
